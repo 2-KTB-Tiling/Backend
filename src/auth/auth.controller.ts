@@ -1,5 +1,18 @@
 // src/auth/auth.controller.ts
-import { Controller, Post, Body, Get, UseGuards, Req, HttpCode, HttpStatus, Query, Res, Redirect , BadRequestException } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  UseGuards,
+  Req,
+  HttpCode,
+  HttpStatus,
+  Query,
+  Res,
+  Redirect,
+  BadRequestException,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { GithubLoginDto } from './dto/login.dto';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
@@ -17,11 +30,11 @@ export class AuthController {
    */
   @Post('github')
   @HttpCode(HttpStatus.OK)
-  async githubLogin(@Body() loginDto: GithubLoginDto): Promise<AuthResponse> {
+  async githubLogin(@Body() loginDto: GithubLoginDto) {
     console.log('백엔드 GitHub 로그인 요청 수신:');
     console.log('요청 본문:', loginDto);
     console.log('인증 코드:', loginDto.code);
-    
+
     try {
       const result = await this.authService.loginWithGithub(loginDto.code);
       console.log('로그인 성공 응답:', result);
@@ -62,5 +75,4 @@ export class AuthController {
       data: null,
     };
   }
-  
 }
