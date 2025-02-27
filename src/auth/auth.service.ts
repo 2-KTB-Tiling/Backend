@@ -135,6 +135,7 @@ export class AuthService {
             client_secret: clientSecret,
             code,
             redirect_uri: redirectUri, // 이 부분이 중요합니다
+            scope: 'read:user user:email',
           }),
         },
       );
